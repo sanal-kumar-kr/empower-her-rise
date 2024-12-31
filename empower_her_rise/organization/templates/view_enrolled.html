@@ -1,0 +1,119 @@
+{% extends "layout.html" %}
+{% block content  %}
+{% load static %}
+
+<style>
+ body {
+        /* background-image: url("{% static 'assets/images/wmpower1.jpg' %}"); */
+        background-repeat: no-repeat;
+        background-size: 100%;
+    }
+    nav{
+    }
+
+    label {
+        color: yellow;
+    }
+
+    .card {
+        background: linear-gradient(135deg, #c3b63c48, #ffffff64); /* Light yellow to white gradient */
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        padding: 20px;
+        margin: 10px;
+        margin-left: 100px;
+        
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-style-white {
+        background-color: white;
+        border: 1px solid #ccc;
+        color: #333;
+    }
+
+    .btn-style-primary {
+        background-color: #007bff;
+        color: white;
+    }
+   h1{
+    font-weight: bold;
+    color: white;
+   }
+   th,td{
+    color: white;
+    background-color: rgba(255, 255, 255, 0.282);
+   }
+   
+</style>
+
+<section class="w3l-banner">
+    <div class="row  mx-auto">
+        <h1 class=" text-center mb-2">Enrolled</h1>
+        <table class="table table-hover ">
+            <thead>
+              <tr>
+                <th scope="col">Username</th>
+
+                <th scope="col">Course</th>
+                <th scope="col">About</th>
+                <th scope="col">Fees</th>
+                <th scope="col">Duration</th>
+
+                <th scope="col">Certificate</th>
+
+                {% if request.session.ut == 2 %}
+                <th scope="col">Action</th>
+
+                {% endif %}
+              </tr>
+            </thead>
+            <tbody>
+                {% for i in data %}
+                <tr>
+                    <th>{{i.userid.username}}</th>
+
+                    <th>{{i.cource.title}}</th>
+                    <td>{{i.cource.description}}</td>
+                    <td>{{i.cource.Fees}}</td>
+
+                    <td>{{i.cource.Duration}}</td>
+                    {% if i.certificate %}
+
+                    <td> <a href="{{i.certificate.url}}" target="_blank" download="">{{i.certificate}}</a> </td>
+                    {% else %}
+                    <td>Not updated</td>
+
+                    {% endif %}
+                   
+                       
+
+                    <td>
+                        {% if request.session.ut == 2 %}
+                        <a href="/uploadcerti/{{ i.id }}" class="btn btn-primary">
+                            Upload Certificate
+                        </a> 
+                        {% endif %}
+                       
+                       
+                    </td>
+                  
+
+                </tr>
+                {% endfor %}
+             
+             
+            </tbody>
+          </table>
+       
+          
+                   
+    </div>
+</section>
+
+{% endblock %}

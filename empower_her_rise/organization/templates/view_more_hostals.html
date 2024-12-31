@@ -1,0 +1,173 @@
+{% extends "layout.html" %}
+{% block content  %}
+{% load static %}
+
+<style>
+    body {
+        /* background-image: url("{% static 'assets/images/wmpower1.jpg' %}"); */
+        background-repeat: no-repeat;
+        background-size: 100%;
+    }
+    nav{
+        /* background-color: rgba(156, 138, 22, 0.756); */
+    }
+    label {
+        color: yellow;
+    }
+   .lead{
+    color: white;
+   }
+    .card {
+        /* background: linear-gradient(135deg, #c3b63c00, #ffffff00);  */
+        /* background-image: url("{% static 'assets/images/hostal12.avif' %}"); */
+         background-color: rgba(232, 128, 43, 0.201);
+        background-repeat: no-repeat;
+        background-size:70%;
+        
+        
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        padding: 20px;
+        margin: 10px;
+        /* margin-left: 180px; */
+        
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .btn-style-white {
+        background-color: white;
+        border: 1px solid #ccc;
+        color: #333;
+    }
+    .btn-style-primary {
+        background-color: #007bff;
+        color: white;
+    }
+    .row{
+        width: 100%;
+        /* background-color: red; */
+    }
+
+    .rating {
+        color: #ffc107;
+    }
+    .star-rating {
+        font-size: 24px;
+    }
+    .star-rating .star {
+        color: #ccc; /* Default color for empty star */
+    }
+    .star-rating .star.active {
+        color: #ffc107; /* Active color for filled star */
+    }
+   
+</style>
+{% if messages %}
+{% for message in messages %}
+   <script>
+    alert('{{message}}')
+   </script>
+{% endfor %}
+{% endif %}
+
+<section class="w3l-banner pt-5" >
+
+    <div class="row ">
+        <div class="col-md-6" >
+
+            <div class="row">
+
+                <div class="col-md-8 mx-auto card" style="max-height: 400px; overflow-y: auto;" >
+                    <h1 class="mb-5 text-white">HostalName <i>{{data.hostal_name}}</i></h1>
+                   
+                    <img src="{{data.hostalimage.url}}" alt="" width="400px" height="180px">
+                        <div class="row">
+                            <div class="col-md-6">
+                                
+                            </div>
+                        </div>
+
+                        <p class="lead">
+                            Location:
+                            <a href="https://www.google.com/maps/search/?api=1&query={{ data.location }}" target="_blank" class="text-info">{{ data.location }}</a>
+
+                        </p> <p class="lead">
+                            Rent:
+                            {{data.Rent}}Rs
+                        
+                        </p> <p class="lead">
+                            Contact:
+                            {{data.contact}}
+                        
+                        </p>
+                    <p class="lead">
+                        Address:
+                        {{data.address}}
+                    
+                    </p>
+                
+                    <p class="lead">
+                        Tenant preference:
+                        {{data.Tenant_preferred}}
+                    
+                    </p>
+                    
+                    <p class="lead">
+                        Rule:
+                        {{data.rule}}
+                    
+                    </p> 
+                    <p class="lead">
+                        Facilities:
+                        {{data.facilities}}
+                    
+                    </p>
+                </div>
+    
+           
+
+
+            </div>
+
+
+        </div>
+        <div class="col-md-6">
+            <div class="row card" style="max-height: 400px; overflow-y: auto;">
+                <div class="col-md-8  "  >
+                    {% if request.session.ut == 0 %}
+                    <a href="/addhostalfeedback/{{data.id}}" class="btn btn-primary mx-auto mb-5">Leave a Feedback</a>
+                    {% endif  %}
+
+                    {% for i in feed %}
+                    <h4 class="text-white"><b>{{i.userid.username}}</b></h4>
+                                   
+                    <div class="star-rating">
+                        {% for star in "☆☆☆☆☆" %}
+                            <span class="star {% if forloop.counter <= i.ratings %}active{% endif %}">&#9733;</span>
+                        {% endfor %}
+                    </div>
+                    <p class="text-white"><i>{{i.feedback}}</i></p>
+                    {%  if request.user.id == i.userid.id %}
+                    <span class="text-danger" onclick="return confirm('Are You sure To Delete This Review')"><a href="/deletehostalfeedback/{{i.id}}" title="Delete Feedback"><i class="fa fa-trash"></i></a></span>
+                    {% endif %}
+                    {% endfor %}
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+        
+    </div>
+</section>
+
+{% endblock %}

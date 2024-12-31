@@ -1,0 +1,150 @@
+{% extends "layout.html" %}
+{% block content  %}
+{% load static %}
+
+<style>
+   body {
+        /* background-image: url("{% static 'assets/images/wmpower1.jpg' %}"); */
+        background-repeat: no-repeat;
+        background-size: 100%;
+    }
+   
+    label {
+        color: yellow;
+    }
+
+    .card {
+        background-color: rgba(232, 128, 43, 0.201);
+
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        padding: 20px;
+        margin: 10px;
+        margin-left: 150px;
+        
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-style-white {
+        background-color: white;
+        border: 1px solid #ccc;
+        color: #333;
+    }
+
+    .btn-style-primary {
+        background-color: #007bff;
+        color: white;
+    }
+    .lead{
+        color: white;
+    }
+    .row{
+        width: 100%;
+    }
+    .collapsed {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+</style>
+{% if messages %}
+{% for message in messages %}
+   <script>
+    alert('{{message}}')
+   </script>
+{% endfor %}
+{% endif %}
+<section class="w3l-banner pt-5">
+    <form method="get" action="" class="mt-5">
+        <input type="text" name="q" placeholder="Search by title" value="{{ request.GET.q }}">
+        <input type="submit" value="Search">
+        <a href="/viewjobs" class="">Refresh</a>
+
+    </form>
+    <div class="row">
+        {% for i in data %}
+        <div class="col-md-4 mt-5 card">
+            <img src="{{i.firmimage.url}}" alt="" width="" height="180px">
+
+            <div class="section-heading mb-sm-5 mb-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="lead">Job Title:
+                            {{i.title}}
+                         </p>
+         
+                         <p class="lead">Firm Name:
+                 
+                            {{i.firm_name}}
+                       
+                       </p>
+
+                    </div>
+                    <div class="col-md-6">
+                       
+                         <p class="lead sm-p">
+                           Description:  {{i.description}}
+                         
+                         </p>
+                         <p class="lead ">
+                           <a href="/viewmorejobs/{{i.id}}">View More....</a>
+                          </p>
+                    </div>
+                 
+                  
+                </div>
+               
+
+                
+               
+
+            </div>
+            <div class="row text-center">
+                {% if request.session.ut == 2 %}
+
+                <div class="team-info col-md-3 col-6"  >
+                    <a href="/editjobs/{{i.id}}" class="btn btn-primary">   Edit</a>
+
+                   
+                </div>
+                <div class="team-info col-md-3 col-6 ml-5 mr-5">
+                    <a href="/deletetalentgroup/{{i.id}}" class="btn btn-danger">  Delete</a>
+
+                                       
+            </div>
+
+             
+                {% endif %}
+
+
+
+              
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const paragraphs = document.querySelectorAll('.sm-p');
+
+        paragraphs.forEach(paragraph => {
+            const computedStyle = window.getComputedStyle(paragraph);
+            const lineHeight = parseInt(computedStyle.getPropertyValue('line-height'));
+            const paragraphHeight = paragraph.clientHeight;
+            const numberOfLines = Math.round(paragraphHeight / lineHeight);
+
+            // If the number of lines exceeds 1, hide the paragraph content and add ellipsis
+            if (numberOfLines > 1) {
+                paragraph.classList.add('collapsed'); // Add a class to indicate the paragraph is collapsed
+                paragraph.style.maxHeight = lineHeight + 'px'; // Limit height to 1 line
+            }
+        });
+    });
+</script>
+{% endblock %}

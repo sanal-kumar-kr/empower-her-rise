@@ -1,0 +1,554 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+-->
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Empower Her Rise</title>
+    <!-- google-fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="{% static 'assets/css/style-starter.css' %}">
+</head>
+<style>
+    li,a{
+        color:rgb(241, 180, 39);
+    }
+    /* body{
+        background-image: url("{% static 'assets/images/img4' %}");
+    } */
+    
+
+</style>
+<body>
+    <!--header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container-fluid">
+            {% if request.session.ut == 1 %}
+            <nav class="navbar navbar-expand-lg stroke">
+                <h1>
+                    <a class="navbar-brand d-flex align-items-center" href="/">
+                        <img src="{% static 'assets/images/wmlogo2.png' %}" alt="" width="180" height="50">
+                       </a>
+                </h1>
+                                    <!-- if logo is image enable this   
+                        <a class="navbar-brand" href="#index.html">
+                            <img src="{%static 'image-path'%}" alt="Your logo" title="Your logo" style="height:35px;" /> -->
+                        <!-- </a>  -->
+                
+
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ml-lg-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link text-white" href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                       
+                    </li>
+                  
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/users">Users</a>
+                    </li>
+                   
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Talent Groups</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/addtalentgroupes">Add Talent Group</a>
+                        <a class="dropdown-item" href="/viewtalentgroupes">View Talent Group</a>
+                      
+                    </div>
+                </li>
+             
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/logout">Log out</a>
+                </li>
+                        <!-- search button -->
+                      
+                       
+                        <!-- //search button -->
+                    </ul>
+                </div>
+                <!-- toggle switch for light and dark theme -->
+               
+            </nav>
+            {% elif request.session.ut == 0 %}
+            <nav class="navbar navbar-expand-lg stroke">
+                <h1>
+                    <a class="navbar-brand d-flex align-items-center" href="/">
+                        <img src="{% static 'assets/images/wmlogo2.png' %}" alt="" width="180" height="50">
+                             </a>
+                </h1>
+                                  
+                
+
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ml-lg-auto">
+                        <li class="nav-item active text-warning">
+                            <a class="nav-link text-white" href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                       
+                    </li>
+                    <li class="nav-item text-warning">
+                        <a class="nav-link text-white" href="/viewtalentgroupes">View Talent Groups</a>
+                    </li>
+                    <li class="nav-item text-warning">
+                        <a class="nav-link text-white"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Education & Job</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/viewhostals">Hostels</a>
+                            <a class="dropdown-item" href="/viewjobs">Jobs</a>
+                            <a class="dropdown-item" href="/viewschema">Schemas</a>
+                            <a class="dropdown-item" href="/viewcheckup">Health checkup</a>
+                          </div>
+                    </li>
+                    <li class="nav-item text-warning">
+                        <a class="nav-link text-white"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cources</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/viewcourses">Cources</a>
+                            <a class="dropdown-item" href="/enrolledusers/{{request.session.uid}}">Enrolled Courses</a>
+
+                          </div>
+                    </li>
+                   
+                    <li class="nav-item text-white">
+                        <a class="nav-link text-white" href="/viewclasses">Classes</a>
+                    </li>
+                     
+                    <li class="nav-item text-white">
+                        <a class="nav-link text-white" href="/bookings/{{request.session.uid}}">bookings</a>
+                    </li>
+                  
+
+
+                </li>
+                <li class="nav-item text-white">
+                    <a class="nav-link text-white" href="/chat">Chat</a>
+                </li>
+                <li class="nav-item text-white">
+                    <a class="nav-link text-white" href="/logout">Log out</a>
+                </li>
+                     
+                    </ul>
+                </div>
+               
+            </nav>
+            {% elif request.session.ut == 2 %}
+            <nav class="navbar navbar-expand-lg stroke">
+                <h1>
+                    <a class="navbar-brand d-flex align-items-center" href="/">
+                        <img src="{% static 'assets/images/wmlogo2.png' %}" alt="" width="180" height="50">
+                    </a>
+                </h1>
+                                    <!-- if logo is image enable this   
+                        <a class="navbar-brand" href="#index.html">
+                            <img src="{%static 'image-path'%}" alt="Your logo" title="Your logo" style="height:35px;" /> -->
+                        </a> 
+                
+
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ml-lg-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link  text-white" href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        
+                                         
+                    <li class="nav-item ">
+                        <a class="nav-link text-white"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Classes</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/addclassess">Add Classes</a>
+                            <a class="dropdown-item" href="/viewclasses">View Classes</a>
+                           
+                          </div>
+                    </li>
+                    <li class="nav-item text-warning">
+                        <a class="nav-link text-white"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hostels</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/addhostals">Add Hostels</a>
+                            <a class="dropdown-item" href="/viewhostals">View Hostels</a>
+                           
+                          </div>
+                    </li>
+                    <li class="nav-item text-warning">
+                        <a class="nav-link text-white"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Courses</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/addcourses">Add Courses</a>
+                            <a class="dropdown-item" href="/viewcourses">View Courses</a>
+                           
+                          </div>
+                    </li>
+                    <li class="nav-item text-warning">
+                        <a class="nav-link text-white"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Jobs</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/addjobs">Add Jobs</a>
+                            <a class="dropdown-item" href="/viewjobs">View Jobs</a>
+                           
+                          </div>
+                    </li>
+                       
+                      
+                    </li>
+                 
+                  
+                </li>
+                <li class="nav-item text-warning">
+                    <a class="nav-link text-white" href="/logout">Log out</a>
+                </li>
+                        <!-- search button -->
+                      
+                       
+                        <!-- //search button -->
+                    </ul>
+                </div>
+                <!-- toggle switch for light and dark theme -->
+               
+            </nav>
+            {% elif request.session.ut == 3 %}
+            <nav class="navbar navbar-expand-lg stroke">
+                <h1>
+                    <a class="navbar-brand d-flex align-items-center" href="/">
+                        <img src="{% static 'assets/images/wmlogo2.png' %}" alt="" width="180" height="50">
+                    </a>
+                </h1>
+                                    <!-- if logo is image enable this   
+                        <a class="navbar-brand" href="#index.html">
+                            <img src="{%static 'image-path'%}" alt="Your logo" title="Your logo" style="height:35px;" /> -->
+                        </a> 
+                
+
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ml-lg-auto">
+                        <li class="nav-item active text-warning">
+                            <a class="nav-link text-white" href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                      
+                    </li>
+                 
+                    <li class="nav-item text-white">
+                        <a class="nav-link text-white"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Health Check Up</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/addcheckup">Add Check Up</a>
+                            <a class="dropdown-item" href="/viewcheckup">View Check Up</a>
+                           
+                          </div>
+                    </li>
+                    <li class="nav-item text-warning">
+                        <a class="nav-link text-white"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Schemas</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/addschema">Add Schemas</a>
+                            <a class="dropdown-item" href="/viewschema">View Schemas</a>
+                           
+                          </div>
+                    </li>
+                    <li class="nav-item text-warning">
+                        <a class="nav-link text-white"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Health Classes</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/addclassess">Add Classes</a>
+                            <a class="dropdown-item" href="/viewclasses">View Classses</a>
+                          </div>
+                    </li>
+                    <li class="nav-item text-warning">
+                        <a class="nav-link text-white" href="/chat">Chat</a>
+                    </li>
+                </li>
+                <li class="nav-item text-warning">
+                    <a class="nav-link text-white" href="/logout">Log out</a>
+                </li>
+                        <!-- search button -->
+                      
+                       
+                        <!-- //search button -->
+                    </ul>
+                </div>
+                <!-- toggle switch for light and dark theme -->
+               
+            </nav>
+
+            {% elif request.session.ut == 4 %}
+            <nav class="navbar navbar-expand-lg stroke">
+                <h1>
+                    <a class="navbar-brand d-flex align-items-center" href="/">
+                        <img src="{% static 'assets/images/wmlogo2.png' %}" alt="" width="180" height="50">
+                    </a>
+                </h1>
+                                    <!-- if logo is image enable this   
+                        <a class="navbar-brand" href="#index.html">
+                            <img src="{%static 'image-path'%}" alt="Your logo" title="Your logo" style="height:35px;" /> -->
+                        </a> 
+                
+
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ml-lg-auto">
+                        <li class="nav-item active text-white">
+                            <a class="nav-link text-white" href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                       
+                    </li>
+                 
+                    <li class="nav-item text-warning">
+                        <a class="nav-link text-white"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Defence Classes</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/addclassess">Add Classes</a>
+                            <a class="dropdown-item" href="/viewclasses">View Classes</a>
+        
+                          </div>
+                    </li>
+                    <li class="nav-item text-warning">
+                        <a class="nav-link text-white" href="/chat">Chat</a>
+                    </li>
+                </li>
+                <li class="nav-item text-warning">
+                    <a class="nav-link text-white" href="/logout">Log out</a>
+                </li>
+                        <!-- search button -->
+                      
+                       
+                        <!-- //search button -->
+                    </ul>
+                </div>
+                <!-- toggle switch for light and dark theme -->
+               
+            </nav>
+
+            {% else %}
+            <nav class="navbar navbar-expand-lg stroke">
+                <h1>
+                    <a class="navbar-brand d-flex align-items-center" href="/">
+                        <img src="{% static 'assets/images/wmlogo2.png' %}" alt="" width="180" height="50">
+                    </a>
+                </h1>
+                                    <!-- if logo is image enable this   
+                        <a class="navbar-brand" href="#index.html">
+                            <img src="{%static 'image-path'%}" alt="Your logo" title="Your logo" style="height:35px;" /> -->
+                        </a> 
+                <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
+                    data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ml-lg-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link text-white" href="/">Home <span class="sr-only">(current)</span></a>
+                      
+                    </li>
+                 
+                    <li class="nav-item">
+                        <a class="nav-link text-white"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Register</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/user">user</a>
+                            <a class="dropdown-item" href="/org">Organization</a>
+                            <a class="dropdown-item" href="/dhoreg">DHO</a>
+                            <a class="dropdown-item" href="/policeofficer">Police officer</a>
+                          </div>
+                    </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/login">Login</a>
+                </li>
+                       
+                        <!-- //search button -->
+                    </ul>
+                </div>
+                <!-- toggle switch for light and dark theme -->
+                
+            </nav>
+           
+
+
+            {% endif %}
+             
+        </div>
+    </header>
+
+
+
+
+
+
+    {% block content %}
+
+
+    {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+       <!-- footer -->
+       <section class="w3l-footer-16">
+        <div class="w3l-footer-16-main">
+            <div class="container">
+                <div class="row footer-p">
+                    <div class="col-lg-4 pr-lg-5">
+                        <a class="logo" href="index.html">About</a>
+                        <p class="mt-4">• Women empowerment is the process that creates power in women to live a happy and respectable life in a society.
+                            • Women are empoweredwhen they are able to access opportunities in a variety of fields such as in education,profession etc.,without any limitations and restrictions.
+                            • It includes raising their status through education, awareness,literacy and training.It also includes the authority to take decisions. </p>
+                    </div>
+                    <div class="col-lg-4 mt-lg-0 mt-4">
+                        
+                    </div>
+                    <div class="col-lg-4 col-md-7 column mt-lg-0 mt-4">
+                        <h3>Address </h3>
+                        <div class="end-column">
+                            <h3>Phone:412341235125</h3>
+                            <h3>EMail:abc@gmail.com</h3>
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex below-section justify-content-between align-items-center pt-4 mt-5">
+                    <div class="columns text-lg-left">
+                      
+                    </div>
+                 
+                </div>
+            </div>
+        </div>
+    </section>
+     <!-- move top -->
+     <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fa fa-level-up" aria-hidden="true"></span>
+    </button>
+    <script>
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () {
+            scrollFunction()
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("movetop").style.display = "block";
+            } else {
+                document.getElementById("movetop").style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+    <!-- //move top -->
+
+    <!-- common jquery plugin -->
+    <script src="{%static 'assets/js/jquery-3.3.1.min.js' %}"></script>
+    <!-- //common jquery plugin -->
+
+    <!-- gallery popup js -->
+    <script src="{%static 'assets/js/smartphoto.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const sm = new SmartPhoto(".js-img-viwer", {
+                showAnimation: false
+            });
+            // sm.destroy();
+        });
+    </script>
+    <!-- //gallery popup js -->
+
+    <!-- theme switch js (light and dark)-->
+    <script src="{% static 'assets/js/theme-change.js' %}"></script>
+    <script>
+        function autoType(elementClass, typingSpeed) {
+            var thhis = $(elementClass);
+            thhis.css({
+                "position": "relative",
+                "display": "inline-block"
+            });
+            thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+            thhis = thhis.find(".text-js");
+            var text = thhis.text().trim().split('');
+            var amntOfChars = text.length;
+            var newString = "";
+            thhis.text("|");
+            setTimeout(function () {
+                thhis.css("opacity", 1);
+                thhis.prev().removeAttr("style");
+                thhis.text("");
+                for (var i = 0; i < amntOfChars; i++) {
+                    (function (i, char) {
+                        setTimeout(function () {
+                            newString += char;
+                            thhis.text(newString);
+                        }, i * typingSpeed);
+                    })(i + 1, text[i]);
+                }
+            }, 1500);
+        }
+
+        $(document).ready(function () {
+            // Now to start autoTyping just call the autoType function with the 
+            // class of outer div
+            // The second paramter is the speed between each letter is typed.   
+            autoType(".type-js", 200);
+        });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+
+    <!-- MENU-JS -->
+    <script>
+        $(window).on("scroll", function () {
+            var scroll = $(window).scrollTop();
+
+            if (scroll >= 80) {
+                $("#site-header").addClass("nav-fixed");
+            } else {
+                $("#site-header").removeClass("nav-fixed");
+            }
+        });
+
+        //Main navigation Active Class Add Remove
+        $(".navbar-toggler").on("click", function () {
+            $("header").toggleClass("active");
+        });
+        $(document).on("ready", function () {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+            $(window).on("resize", function () {
+                if ($(window).width() > 991) {
+                    $("header").removeClass("active");
+                }
+            });
+        });
+    </script>
+    <!-- //MENU-JS -->
+
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+        $(function () {
+            $('.navbar-toggler').click(function () {
+                $('body').toggleClass('noscroll');
+            })
+        });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+
+    <!--bootstrap-->
+    <script src="{%static 'assets/js/bootstrap.min.js' %}"></script>
+    <!-- //bootstrap-->
+    <!-- //Js scripts -->
+    
+</body>
+
+</html> 
+    <!-- //footer -->

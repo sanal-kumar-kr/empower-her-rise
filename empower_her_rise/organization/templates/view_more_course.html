@@ -1,0 +1,150 @@
+{% extends "layout.html" %}
+{% block content  %}
+{% load static %}
+
+<style>
+    body {
+        /* background-image: url("{% static 'assets/images/wmpower1.jpg' %}"); */
+        background-repeat: no-repeat;
+        background-size: 100%;
+    }
+    nav{
+        /* background-color: rgba(156, 138, 22, 0.756); */
+    }
+    label {
+        color: yellow;
+    }
+   .lead{
+    color: white;
+   }
+    .card {
+        /* background: linear-gradient(135deg, #c3b63c00, #ffffff00);  */
+        /* background-image: url("{% static 'assets/images/hostal12.avif' %}"); */
+         background-color: rgba(232, 128, 43, 0.201);
+        background-repeat: no-repeat;
+        background-size:70%;
+        
+        
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        padding: 20px;
+        margin: 10px;
+        /* margin-left: 180px; */
+        
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .btn-style-white {
+        background-color: white;
+        border: 1px solid #ccc;
+        color: #333;
+    }
+    .btn-style-primary {
+        background-color: #007bff;
+        color: white;
+    }
+    .row{
+        width: 100%;
+        /* background-color: red; */
+    }
+
+    .rating {
+        color: #ffc107;
+    }
+    .star-rating {
+        font-size: 24px;
+    }
+    .star-rating .star {
+        color: #ccc; /* Default color for empty star */
+    }
+    .star-rating .star.active {
+        color: #ffc107; /* Active color for filled star */
+    }
+    
+   
+</style>
+{% if messages %}
+{% for message in messages %}
+   <script>
+    alert('{{message}}')
+   </script>
+{% endfor %}
+{% endif %}
+
+<section class="w3l-banner pt-5" >
+    <div class="row mt-5">
+        
+        <div class="col-md-6" >
+
+            <div class="row card" style="max-height: 400px; overflow-y: auto;">
+                <div class="col-md-8">
+                    {% if request.session.ut == 2 %}
+                    <a href="/addcourcevideo/{{data.id}}" class="btn btn-primary mx-auto mb-2">Add Class Videos</a>
+                    {% endif  %}
+                    <h1 class="mb-4 text-white"><i>{{data.title}}</i></h1>
+                    {% for i in video %}
+                    
+                            <video width="320" height="240" controls muted>
+                                <source src="{{i.classvideo.url}}" type="video/mp4">                        
+                            </video>
+
+
+                        {%  if request.user.usertype == 2%}
+                            <a href="/deletecoursevideo/{{i.id}}" class="btn btn-danger mb-5" onclick="return confirm('Are You sure To Delete ')">Delete</a>
+
+                        {% endif %}
+                     
+                    
+                    {% endfor %}
+
+                </div>
+              
+
+
+
+            </div>
+           
+
+
+        </div>
+
+
+        <div class="col-md-6">
+            <div class="row card" style="max-height: 400px; overflow-y: auto;">
+              <div class="col-md-8">
+                {% if request.session.ut == 2 %}
+                <a href="/addlink/{{data.id}}" class="btn btn-primary mx-auto mb-2">Add  Google Form Exam Link</a>
+                {% endif  %}
+                <h1 class="mb-4 text-white"><i>{{data.title}}</i></h1>
+                {% for i in link %}
+
+               <i class="text-white mt-5">{{i.current_time}}</i> 
+
+                <a href="{{i.link}}"> <p class="text-info">Cleak here To Start Exam------></p></a>
+                {%  if request.user.usertype == 2 %}
+                <span class="text-danger" onclick="return confirm('Are You sure To Delete ')"><a href="/deletecourselink/{{i.id}}" title="Delete "><h4 class="text-danger"><i class="fa fa-trash"></i></h4></a></span><br>
+                {% endif %}
+                {% endfor %}
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+
+        
+</section>
+
+{% endblock %}

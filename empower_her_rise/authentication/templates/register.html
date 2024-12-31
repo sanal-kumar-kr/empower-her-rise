@@ -1,0 +1,219 @@
+
+{% extends "layout.html" %}
+{% block content  %}
+{% load static %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<!-- mail -->
+
+
+
+<!-- //js -->
+<!-- font-awesome-icons -->
+
+<!-- <div class="latest-albums">
+    <div class="container">
+        <h3 class="agileits_w3layouts_head">Register <span>Here</span></h3>
+        <p class="w3_agileits_para">Quisque faucibus vel leo a luctus.</p>
+        <div class="wthree_latest_albums_grids gallery">
+            <div class="col-md-8 agile_mail_grid_left">
+                <form  method="post"> 
+                   
+                    <input type="submit" value="Submit Now" >
+                </form>
+            </div>
+           
+        </div>
+    </div>
+    
+</div> -->
+
+<style>
+    body{
+        /* background-image: url("{%static 'assets/images/womenem.jpg'  %}"); */
+    }
+    label{
+        color: yellow;
+    }
+    form{
+        background-color: rgba(255, 255, 255, 0.093);
+
+    }
+</style>
+
+<div class="form-41-mian  pt-lg-6 pt-md-4 cover-div w3l-banner ">
+
+    <div class="container mx-auto">
+
+        <div class="form-inner-cont">
+            <h1 class="mb-5 text-center text-white"><b><i> {{title}}</i>  </b></h1>
+
+            <form method="post" class="signin-form" enctype="multipart/form-data">
+               
+                    {% csrf_token %}
+                    {{form.as_p}}  
+                
+                <div class="submit text-left">
+                    <button type="submit" class="btn btn-style-white btn-style-primary">Submit
+                     </button>
+                </div>
+            </form>
+        </div>
+      
+    </div>
+</div>
+{% if validation %}
+<script>
+$(document).ready(function(){
+
+    $("button[type='submit']").on("click",function(){
+   
+     
+     name=$("input[name='username']").val()
+     email=$("input[type='email']").val()
+     password=$("input[name='password']").val()
+     phone=$("input[name='contact']").val()
+     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+     if(name==""){
+      alert("Enter name!!!!!!!!!!!!!!!!!!");
+      return false;
+     } 
+     if(email=="" || !emailRegex.test(email)){
+      alert("Enter Valid Email!!!!!!!!!!!!!!!!!!!1");
+      return false;
+     } 
+   
+     if(password==""){
+      alert("Enter password!!!!!!!!!!!!!!!!!!");
+      return false;
+     } 
+     if(phone ="" || phone.length!=10){ 
+      alert("Enter valid phone number");
+      return false;
+     } 
+   
+     
+  })
+ })
+
+ </script>
+ 
+ {% endif %}
+ <script>
+    
+ $("#id_class_type").on("change",function(){
+    if($("#id_class_type").val() == "online"){
+        $("label[for=id_place]").hide()
+        $("#id_place").hide()
+    }
+    else if($("#id_class_type").val() == "offline"){
+        $("label[for=id_place]").show()
+        $("#id_place").show()
+    }
+
+ });
+ </script>
+ {% if request.session.ut == 2 %}
+ <script>
+  $("label[for=id_amount]").show()
+    $("#id_amount").show()
+ </script>
+ {% else %}
+ <script>
+    $("label[for=id_amount]").hide()
+    $("#id_amount").hide()
+
+ </script>
+
+ {% endif %}
+ 
+ {% if payment %}
+ <script>
+    $(document).ready(function(){
+
+
+        $("button[type=submit]").click(function(){
+       
+
+        var cardNumber = $("#id_CardNumber").val();
+        var cardNumberPattern = /^[0-9]{16}$/; // Assuming a 16 digit card number
+        if (!cardNumberPattern.test(cardNumber)) {
+            alert("Invalid Card Number. It should be 16 digits.");
+            return false
+    
+        }
+
+        var cvv = $("#id_CVV").val();
+        var cvvPattern = /^[0-9]{3,4}$/; // Assuming 3 or 4 digit CVV
+        if (!cvvPattern.test(cvv)) {
+            alert("Invalid CVV. It should be 3 or 4 digits.");
+            return false;
+        }
+
+        var expiryDate =  $("#id_ExpiryDate").val();
+        var expiryDatePattern = /^(0[1-9]|1[0-2])\/([0-9]{2})$/; // MM/YY format
+        if (!expiryDatePattern.test(expiryDate)) {
+            alert("Invalid Expiry Date. It should be in MM/YY format.");
+            return false;
+        }
+        })
+
+});
+</script>
+ {% endif %}
+ {% if checkup %}
+ <script>
+        $(document).ready(function(){
+            function validatedate(){
+                current_data=new Date()
+                slected_data=new Date($("#id_date").val())
+                if (slected_data <= current_data) {
+                    alert("Select Valid Date");
+                    return false;
+                    
+                }
+            }
+         
+            $("#id_date").change(function(){
+                return validatedate();
+            })
+            $("button[type=submit]").click(function(){
+               return validatedate();
+            })
+            
+
+        })
+
+ </script>
+
+ {% endif %}
+
+
+
+ {% if Time %}
+ <script>
+    $(document).ready(function(){
+        function validateTime() {
+            var start_time = $("#id_start_time").val();
+            var end_time = $("#id_end_time").val();
+
+            if (new Date(start_time) >= new Date(end_time)) {
+                alert("Start time should be less than end time.");
+                return false;
+            }
+            
+        }
+        $("#id_end_time").change(function(){
+                return validateTime();
+            })
+
+        $("button[type=submit]").click(function(){
+            return validateTime();
+        })
+            
+    });
+</script>
+{% endif %}
+
+{% endblock %}

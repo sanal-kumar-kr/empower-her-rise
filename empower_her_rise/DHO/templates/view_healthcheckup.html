@@ -1,0 +1,110 @@
+{% extends "layout.html" %}
+{% block content  %}
+{% load static %}
+
+<style>
+     body {
+        /* background-image: url("{% static 'assets/images/wmpower1.jpg' %}"); */
+    }
+
+    label {
+        color: yellow;
+    }
+
+    .card {
+        background-color: rgba(232, 128, 43, 0.201);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        padding: 20px;
+        margin: 10px;
+        margin-left: 130px;
+        
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-style-white {
+        background-color: white;
+        border: 1px solid #ccc;
+        color: #333;
+    }
+
+    .btn-style-primary {
+        background-color: #007bff;
+        color: white;
+    }
+   .lead{
+    color: white;
+   }
+   .row{
+    width:100%;
+   }
+</style>
+{% if messages %}
+{% for message in messages %}
+   <script>
+    alert('{{message}}')
+   </script>
+{% endfor %}
+{% endif %}
+<section class="w3l-banner pt-5" >
+    <div class="row">
+        {% for i in data %}
+        <div class="col-md-4 mt-5 card">
+            <div class="section-heading mb-sm-5 mb-4">
+                
+                   
+                    <h3 class="text-white"> <b>{{i.title}}</b></h3>
+                   
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="lead">
+                            Description:
+                           {{i.description}}
+                           
+                         </p>
+                         <p class="lead">
+                            Date:
+                        {{i.date}}
+                           
+                         </p>
+                        
+                    </div>
+                    <div class="col-md-6">
+                        <p class="lead">
+                            Place:
+                            <a href="https://www.google.com/maps/search/?api=1&query={{i.place}}" target="_blank" class="text-info" >   {{i.place}}</a>
+                           
+                         </p>
+                        <p class="lead">
+                            Time:
+                            {{i.time}}
+                         </p>
+                        
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="row text-center">
+                {% if request.session.ut == 3 %}
+                <div class="team-info col-md-3 col-6"  >
+                    <a href="/editcheckup/{{i.id}}" class="btn btn-primary"> Edit</a>
+                </div>
+                <div class="team-info col-md-3 col-6 ml-5 mr-5" onclick="return confirm('Are You Sure To Delete')">
+                    <a href="/deletecheckup/{{i.id}}" class="btn btn-danger" >   Delete</a>                
+                </div>
+                
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

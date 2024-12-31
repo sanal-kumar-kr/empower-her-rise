@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>police Officer Registeration</title>
+    <link rel="stylesheet" href="css/style-starter.css">
+</head>
+<body>
+    <h2>police Officer Registration</h2>
+    <link href="css/style-starter.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="{%static 'js/jquery-2.1.4.min.js' %}"></script>
+    <div class="container">
+    <form action="#" method="POST">
+        <label for="officername">Officer Name</label>
+        <input type="text" id="officername" name="officername" required><br><br>
+
+        <label for="contact">Contact:</label>
+        <input type="text" id="contact" name="contact" required><br><br>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select><br><br>
+
+        <label for="rank">Rank:</label>
+        <input type="text" id="rank" name="rank" required><br><br>
+
+        <label for="district">District:</label>
+        <input type="text" id="district" name="district" required><br><br>
+
+        <label for="state">State:</label>
+        <input type="text" id="state" name="state" required><br><br>
+
+        <label for="id_proof">ID Proof:</label>
+        <input type="text" id="id_proof" name="id_proof" required><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

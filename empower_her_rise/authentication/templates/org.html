@@ -1,0 +1,45 @@
+{% load static %}
+
+
+<!-- js -->
+
+<!-- //js -->
+<!-- font-awesome-icons
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organization Registration</title>
+    <link rel="stylesheet" href="css/style-starter.css">
+</head>
+<body>
+    <link href="css/style-starter.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="{%static 'js/jquery-2.1.4.min.js' %}"></script>
+    <div class="container">
+        <h2>Organization Registration</h2>
+        <form action="#" method="post">
+            <label for="org_name">Organization Name:</label>
+            <input type="text" id="org_name" name="org_name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="contact">Contact:</label>
+            <input type="tel" id="contact" name="contact" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+
+            <label for="id_proof">ID Proof:</label>
+            <input type="file" id="id_proof" name="id_proof" accept=".jpg, .jpeg, .png, .pdf" required>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>

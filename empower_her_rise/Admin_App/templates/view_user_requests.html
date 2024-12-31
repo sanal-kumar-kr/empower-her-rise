@@ -1,0 +1,307 @@
+{% extends "layout.html" %}
+{% block content  %}
+{% load static %}
+
+<style>
+ body {
+        /* background-image: url("{% static 'assets/images/wmpower1.jpg' %}"); */
+        background-repeat: no-repeat;
+        background-size: 100%;
+    }
+    nav{
+    }
+
+    label {
+        color: yellow;
+    }
+
+    .card {
+        background: linear-gradient(135deg, #c3b63c48, #ffffff64); /* Light yellow to white gradient */
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        padding: 20px;
+        margin: 10px;
+        margin-left: 100px;
+        
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-style-white {
+        background-color: white;
+        border: 1px solid #ccc;
+        color: #333;
+    }
+
+    .btn-style-primary {
+        background-color: #007bff;
+        color: white;
+    }
+   h1{
+    font-weight: bold;
+    color: white;
+   }
+   th,td{
+    color: white;
+    background-color: rgba(255, 255, 255, 0.282);
+   }
+   
+</style>
+
+<section class="w3l-banner pt-5">
+    <div class="row  mx-auto mt-5">
+      
+        <h1 class="mt-5 text-center">Organization</h1>
+       
+        <table class="table table-hover mt-4">
+            <thead>
+              <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Contact</th>
+                <th scope="col">Description</th>
+
+                <th scope="col">Id Proof</th>
+                <th scope="col" class="text-center" >Action</th>
+
+                
+
+
+              </tr>
+            </thead>
+            <tbody>
+                {% for i in org %}
+                <tr>
+                    <th scope="row">{{i.username}}</th>
+                    <td>{{i.email}}</td>
+                    <td>{{i.contact}}</td>
+                    <td style="overflow-wrap: break-word;">{{i.description}}</td>
+                    {% if i.id_proof %}
+                    <td><a href="{{i.id_proof.url}}">Id Proof</a></td>
+                    {% endif %}
+                    <td>
+                        {% if i.status == 0 %}
+                        <a href="/approve/{{ i.id }}">
+                            <button type="button" class="btn-white btn-style-primary">Approve</button>
+                        </a> 
+                        <a href="/reject/{{ i.id }}">
+                            <button type="button" class="btn-white btn-style-primary">Reject</button>
+                        </a> 
+
+                        {% else %}
+                        {% if i.status == 1 %}
+                        <a href="/disable/{{ i.id }}">
+                            <button type="button" class="btn-white btn-style-primary">Disable</button>
+                        </a> 
+                        {% endif %}
+                        {% if i.status == 3 %}
+
+                        <a href="/enable/{{ i.id }}">
+                            <button type="button" class="btn-white btn-style-primary">Enable</button>
+                        </a> 
+                        {% endif %}
+
+
+                        {% endif %}
+                       
+                    </td>
+                  
+
+                </tr>
+                {% endfor %}
+             
+             
+            </tbody>
+          </table>
+        <h1 class="mt-5 text-center">Users</h1>
+       
+        <table class="table table-hover mt-4">
+            <thead>
+              <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Contact</th>
+                <th scope="col">District</th>
+                <th scope="col">Pin</th>
+
+                <th scope="col">Street</th>
+
+                <th scope="col">House No</th>
+                <th scope="col" class="text-center" >Action</th>
+
+                
+
+
+              </tr>
+            </thead>
+            <tbody>
+                {% for i in user %}
+                <tr>
+                    <th scope="row">{{i.username}}</th>
+                    <td>{{i.email}}</td>
+                    <td>{{i.contact}}</td>
+                    <td>{{i.district}}</td>
+                    <td>{{i.pin}}</td>
+
+
+
+                    <td>{{i.street}}</td>
+                    <td>{{i.houseno}}</td>
+                    <td>
+                        {% if i.status == 1 %}
+                        <a href="/disable/{{ i.id }}">
+                            <button type="button" class="btn-white btn-style-primary">Disable</button>
+                        </a> 
+                        {% endif %}
+                        {% if i.status == 3 %}
+
+                        <a href="/enable/{{ i.id }}">
+                            <button type="button" class="btn-white btn-style-primary">Enable</button>
+                        </a> 
+                        {% endif %}
+                       
+                    </td>
+                  
+
+                </tr>
+                {% endfor %}
+             
+             
+            </tbody>
+          </table>
+       
+            <h1 class="mt-5 text-center">DHO</h1>
+       
+            <table class="table table-hover mt-4">
+                <thead>
+                  <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">Gender</th>
+
+                    <th scope="col">Email</th>
+                    <th scope="col">Contact</th>
+                    <th scope="col">Qualification</th>
+    
+                    <th scope="col">Experience</th>
+                    <th scope="col">Id Proof</th>
+                    <th scope="col">State</th>
+                    <th scope="col">District</th>
+
+
+                    <th scope="col" class="text-center" >Action</th>
+    
+                    
+    
+    
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for i in dho %}
+                    <tr>
+                        <th scope="row">{{i.username}}</th>
+                        <td>{{i.gender}}</td>
+
+                        <td>{{i.email}}</td>
+                        <td>{{i.contact}}</td>
+                        <td>{{i.qualification}}</td>
+                        <td>{{i.yearofexperience}}</td>
+                        {% if i.id_proof %}
+
+                        <td><a href="{{i.id_proof.url}}">Id Proof</a></td>
+                        {% endif %}
+                        <td>{{i.state}}</td>
+                        <td>{{i.district}}</td>
+
+                        <td>
+                            {% if i.status == 1 %}
+                            <a href="/disable/{{ i.id }}">
+                                <button type="button" class="btn-white btn-style-primary">Disable</button>
+                            </a> 
+                            {% endif %}
+                            {% if i.status == 3 %}
+    
+                            <a href="/enable/{{ i.id }}">
+                                <button type="button" class="btn-white btn-style-primary">Enable</button>
+                            </a> 
+                            {% endif %}
+                           
+                        </td>
+                      
+    
+                    </tr>
+                    {% endfor %}
+                 
+                 
+                </tbody>
+              </table>
+              <h1 class="mt-5 text-center">Police</h1>
+       
+              <table class="table table-hover mt-4">
+                  <thead>
+                    <tr>
+                      <th scope="col">Username</th>
+                      <th scope="col">Gender</th>
+
+                      <th scope="col">Email</th>
+                      <th scope="col">Contact</th>
+                      <th scope="col">Rank</th>
+      
+                      <th scope="col">Id proof</th>
+                      <th scope="col">State</th>   
+                      <th scope="col">District</th>
+                      <th scope="col" class="text-center" >Action</th>
+      
+                      
+      
+      
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {% for i in police %}
+                      <tr>
+                          <th scope="row">{{i.username}}</th>
+                          <td>{{i.gender}}</td>
+
+                          <td>{{i.email}}</td>
+                          <td>{{i.contact}}</td>
+                          <td>{{i.rank}}</td>
+                          {% if i.id_proof %}
+
+                          <td><a href="{{i.id_proof.url}}">Id Proof</a></td>
+                          {% endif %}
+
+                          <td>{{i.state}}</td>
+                          <td>{{i.district}}</td>
+
+                          <td>
+                            {% if i.status == 1 %}
+                        <a href="/disable/{{ i.id }}">
+                            <button type="button" class="btn-white btn-style-primary">Disable</button>
+                        </a> 
+                        {% endif %}
+                        {% if i.status == 3 %}
+
+                        <a href="/enable/{{ i.id }}">
+                            <button type="button" class="btn-white btn-style-primary">Enable</button>
+                        </a> 
+                        {% endif %}
+                             
+                          </td>
+                        
+      
+                      </tr>
+                      {% endfor %}
+                   
+                   
+                  </tbody>
+                </table>
+          
+                   
+    </div>
+</section>
+
+{% endblock %}

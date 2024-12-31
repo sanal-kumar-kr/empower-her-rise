@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user</title>
+    <link rel="stylesheet" href="css/style-starter.css">
+</head>
+<body>
+    <link href="css/style-starter.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="{%static 'js/jquery-2.1.4.min.js' %}"></script>
+    <div class="container">
+        <h2>user</h2>
+        <form action="#" method="post">
+            <label for="org_name">Name:</label>
+            <input type="text" id="org_name" name="org_name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="contact">Contact:</label>
+            <input type="tel" id="contact" name="contact" required>
+
+            <label for="houseno">houseno:</label>
+            <textarea id="houseno" name="houseno" rows="4" required></textarea>
+            
+            <label for="Street">Street</label>
+            <textarea id="Street" name="Street" rows="4" required></textarea>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,168 @@
+{% extends "layout.html" %}
+{% block content  %}
+{% load static %}
+
+<style>
+    body {
+        /* background-image: url("{% static 'assets/images/wmpower1.jpg' %}"); */
+        background-repeat: no-repeat;
+        background-size: 100%;
+    }
+    nav {
+        /* background-color: rgba(156, 138, 22, 0.756); */
+    }
+
+    label {
+        color: yellow;
+    }
+
+    .card {
+        background-color: rgba(232, 128, 43, 0.201);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        padding: 20px;
+        margin: 10px;
+        margin-left: 150px;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-style-white {
+        background-color: white;
+        border: 1px solid #ccc;
+        color: #333;
+    }
+
+    .btn-style-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .lead {
+        color: white;
+    }
+
+    .row {
+        width: 100%;
+    }
+
+    /* Styles for usertype 0 */
+    .usertype-0 .card {
+        background-color: rgba(100, 100, 255, 0.2);
+    }
+
+    .usertype-0 .btn-primary {
+        background-color: blue;
+        color: white;
+    }
+
+    .usertype-0 .lead {
+        color: white;
+    }
+
+    /* Styles for usertype 2 */
+    .usertype-2 .card {
+        background-color: rgba(255, 100, 100, 0.2);
+    }
+
+    .usertype-2 .btn-primary {
+        background-color: blue;
+        color: white;
+    }
+
+    .usertype-2 .lead {
+        color: white;
+    }
+</style>
+
+{% if messages %}
+{% for message in messages %}
+    <script>
+        alert('{{ message }}')
+    </script>
+{% endfor %}
+{% endif %}
+
+<section class="w3l-banner pt-5">
+    <form method="get" action="" class="mt-5">
+        <input type="text" name="q" placeholder="Search by title" value="{{ request.GET.q }}">
+        <input type="submit" value="Search">
+        <a href="/viewcourses" class="">Refresh</a>
+
+    </form>
+    <div class="row">
+        {% for i in data %}
+        <div class="col-md-4 mt-5 card {% if request.session.ut == 0 %}usertype-0{% elif request.session.ut == 2 %}usertype-2{% endif %}">
+            <img src="{{ i.courceimage.url }}" alt="" width="" height="180px">
+            <div class="section-heading mb-sm-5 mb-4">
+                <h5 class="title-style text-white">{{ i.title }}</h5>
+                <p class="lead sm-p">
+                    Description: {{i.description }}
+                </p>
+                <p class="lead">Duration: {{ i.Duration }}</p>
+                <p class="lead">Fees: {{ i.Fees }} Rs</p>
+            </div>
+            <div class="row">
+                {% if request.session.ut == 2 %}
+                <div class="team-info col-md-2 ">
+                    <a href="/editcourses/{{ i.id }}" class="btn btn-primary">Edit</a>
+                </div>
+               
+                <div class="team-info col-md-2  ml-2">
+                    <a href="/deletetalentgroup/{{ i.id }}" class="btn btn-danger">Delete</a>
+                </div>
+                <div class="team-info col-md-2  ml-3">
+                    <a href="/enrolledusers/{{ i.id }} " class="btn btn-primary">Enrolled</a>
+                </div>
+                <div class="team-info col-md-2  ml-4">
+                    <a href="/viewmorecourse/{{ i.id }}" class="btn btn-primary">Classes&Exam</a>
+                </div>
+                {% else %}
+                <div class="team-info col-md-2 mr-3">
+                    <a href="/viewmorecourse/{{ i.id }}" class="btn btn-primary">Classes&Exam</a>
+                </div>
+                <div class="team-info col-md-2  ml-5">
+                    <a href="/enrollcources/{{ i.id }}" class="btn btn-primary">Enroll</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+<script>
+    // Select all elements with class 'paragraph'
+    const paragraphs = document.querySelectorAll('.sm-p');
+  
+    // Loop through each paragraph
+    paragraphs.forEach(paragraph => {
+        const computedStyle = window.getComputedStyle(paragraph);
+        const lineHeight = parseInt(computedStyle.getPropertyValue('line-height'));
+        const paragraphHeight = paragraph.clientHeight;
+        const numberOfLines = Math.round(paragraphHeight / lineHeight);
+  
+        // If the number of lines exceeds 2, hide the paragraph content
+        if (numberOfLines > 1) {
+            paragraph.classList.add('collapsed'); // Add a class to indicate the paragraph is collapsed
+            paragraph.style.maxHeight = lineHeight * 1 + 'px'; // Limit height to 2 lines
+            paragraph.style.overflow = "hidden";
+            paragraph.title = "Click here To View More"; // Hide overflow
+        }
+  
+        // Add click event listener to toggle visibility
+        paragraph.addEventListener('click', function() {
+            if (this.classList.contains('collapsed')) {
+                this.style.maxHeight = 'none'; // Show full content
+                this.classList.remove('collapsed'); // Remove collapsed class
+            } else {
+                this.style.maxHeight = lineHeight * 1 + 'px'; // Limit height to 2 lines
+                this.classList.add('collapsed'); // Add collapsed class
+            }
+        });
+    });
+  </script>
+{% endblock %}

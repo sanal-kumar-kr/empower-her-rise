@@ -1,0 +1,116 @@
+
+{% extends "layout.html" %}
+{% block content  %}
+{% load static %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<!-- mail -->
+
+
+
+<!-- //js -->
+<!-- font-awesome-icons -->
+
+<!-- <div class="latest-albums">
+    <div class="container">
+        <h3 class="agileits_w3layouts_head">Register <span>Here</span></h3>
+        <p class="w3_agileits_para">Quisque faucibus vel leo a luctus.</p>
+        <div class="wthree_latest_albums_grids gallery">
+            <div class="col-md-8 agile_mail_grid_left">
+                <form  method="post"> 
+                   
+                    <input type="submit" value="Submit Now" >
+                </form>
+            </div>
+           
+        </div>
+    </div>
+    
+</div> -->
+
+<style>
+    body{
+        /* background-image: url("{%static 'assets/images/womenem.jpg'  %}"); */
+    }
+    label{
+        color: yellow;
+    }
+    .rating {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .rating input {
+            display: none;
+        }
+
+        .rating label {
+            cursor: pointer;
+            font-size: 30px;
+            color: #ccc;
+        }
+
+        .rating label:hover,
+        .rating label:hover ~ label,
+        .rating input:checked ~ label {
+            color: #fdd835;
+        }
+        form{
+        background-color: rgba(255, 255, 255, 0.093);
+
+    }
+</style>
+
+<div class="form-41-mian  pt-lg-6 pt-md-4 cover-div w3l-banner ">
+
+    <div class="container mx-auto">
+
+        <div class="form-inner-cont">
+            <h1 class="mb-5 text-center text-white"><b><i>Add Feed Back</i>  </b></h1>
+
+            <form method="post" class="signin-form" enctype="multipart/form-data">
+               
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="rating">Rating</label>
+                    <div class="rating">
+                        <input type="radio" name="rating" id="star5" value="5">
+                        <label for="star5">&#9733;</label>
+                        <input type="radio" name="rating" id="star4" value="4">
+                        <label for="star4">&#9733;</label>
+                        <input type="radio" name="rating" id="star3" value="3">
+                        <label for="star3">&#9733;</label>
+                        <input type="radio" name="rating" id="star2" value="2">
+                        <label for="star2">&#9733;</label>
+                        <input type="radio" name="rating" id="star1" value="1">
+                        <label for="star1">&#9733;</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="comment">Comment</label>
+                    <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
+                </div>
+                
+                <div class="submit text-left">
+                    <button type="submit" class="btn btn-style-white btn-style-primary">Submit
+                     </button>
+                </div>
+            </form>
+        </div>
+      
+    </div>
+</div>
+<script> 
+    const stars = document.querySelectorAll('.rating input');
+
+    stars.forEach(star => {
+        star.addEventListener('change', (event) => {
+            const rating = event.target.value;
+            console.log(`Selected rating: ${rating}`);
+            // You can add further logic here to handle the selected rating
+        });
+    });
+</script>
+{% endblock %}

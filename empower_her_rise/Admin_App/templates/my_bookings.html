@@ -1,0 +1,120 @@
+{% extends "layout.html" %}
+{% block content  %}
+{% load static %}
+
+<style>
+  body {
+        /* background-image: url("{% static 'assets/images/wmpower1.jpg' %}"); */
+        background-repeat: no-repeat;
+        background-size: 100%;
+    }
+    nav{
+    }
+    label {
+        color: yellow;
+    }
+
+    .card {
+        background-color: rgba(232, 128, 43, 0.201);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        padding: 20px;
+        margin: 10px;
+        margin-left:170px;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-style-white {
+        background-color: white;
+        border: 1px solid #ccc;
+        color: #333;
+    }
+
+    .btn-style-primary {
+        background-color: #007bff;
+        color: white;
+    }
+    .lead{
+        color: white;
+    }
+    .w3l-banner{
+    display:block;
+
+   }
+   
+</style>
+{% if messages %}
+{% for message in messages %}
+   <script>
+    alert('{{message}}')
+   </script>
+{% endfor %}
+{% endif %}
+<section class="w3l-banner pt-5">
+    <div class="row ">
+        {% for i in data %}
+        <div class="col-md-4 mt-5 card">
+            <div class="section-heading mb-sm-5 mb-4">
+                <h2 class="text-white">
+                    <b>Paid</b><i> {{i.classid.amount}}Rs</i> </h2>
+                <h5 class="title-style mb-2 text-white">
+                 {{i.classid.title}}
+                </h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="lead">
+                            Description:
+                           {{i.classid.description}}
+                         </p>
+                         <p class="lead">
+                            start_time:
+                             {{i.classid.start_time}}
+                           
+                         </p>
+                         {% if i.classid.place %}
+                         <p class="lead">
+                           Place:
+                            {{i.classid.place}}
+                          
+                         </p>
+                         {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <p class="lead">
+                            Date:
+                            {{i.classid.date}}
+                            
+                         </p>
+                        <p class="lead">
+                            End Time:
+                             {{i.classid.end_time}}
+                           
+                         </p>
+                         <p class="lead">
+                            Class type:
+                            {{i.classid.class_type}}
+                           
+                         </p>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="row text-center">
+                <div class="team-info col-md-3 col-6"  >
+                    <a href="/cancelbooking/{{i.id}}" class="btn btn-primary">Cancel</a>
+                </div>
+               
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}
